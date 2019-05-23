@@ -5,5 +5,6 @@
         public int SeatId { get; set; }
         public string Title { get; set; }
         public Screen Screen { get; set; }
+        public int ScreenId { get; set; }
     }
 }

@@ -73,6 +73,25 @@ namespace CinemaBooking.Tests.Fakes
             var screen2 = screens.Single(s => s.Title == "Screen2");
             var screen3 = screens.Single(s => s.Title == "Screen3");
 
+
+            var seats = new List<Seat>
+            {
+                new Seat { Title = "Seat1" },
+                new Seat { Title = "Seat2" },
+                new Seat { Title = "Seat3" },
+                new Seat { Title = "Seat4" },
+                new Seat { Title = "Seat5" },
+                new Seat { Title = "Seat6" },
+                new Seat { Title = "Seat7" },
+                new Seat { Title = "Seat8" },
+                new Seat { Title = "Seat9" },
+                new Seat { Title = "Seat10" }
+            };
+
+            screen1.Seats.AddRange(seats);
+            screen2.Seats.AddRange(seats);
+            screen3.Seats.AddRange(seats);
+
             var showTimes = new List<ShowTime>
             {
                 new ShowTime { ShowDateTime = new DateTime(2019,05,21,11,0,0), Screen = screen1 },
@@ -106,45 +125,38 @@ namespace CinemaBooking.Tests.Fakes
             var show2221 = showTimes.Single(s => s.ShowDateTime.Day == 22 && s.ShowDateTime.Hour == 21);
             var show2223 = showTimes.Single(s => s.ShowDateTime.Day == 22 && s.ShowDateTime.Hour == 23);
 
-
             batmanBegins.MovieShowTimes = new List<MovieShowTime>();
             batmanBegins.MovieShowTimes.AddRange(new List<MovieShowTime>
             {
-                new MovieShowTime { Movie = batmanBegins, ShowTime =  show2114},
-                new MovieShowTime { Movie = batmanBegins, ShowTime = show2117},
-                new MovieShowTime { Movie = batmanBegins, ShowTime = show2121},
-                new MovieShowTime { Movie = batmanBegins, ShowTime =  show2214},
-                new MovieShowTime { Movie = batmanBegins, ShowTime = show2217},
-                new MovieShowTime { Movie = batmanBegins, ShowTime = show2221},
+                new MovieShowTime { Movie = batmanBegins, ShowTime = show2114 },
+                new MovieShowTime { Movie = batmanBegins, ShowTime = show2117 },
+                new MovieShowTime { Movie = batmanBegins, ShowTime = show2121 },
+                new MovieShowTime { Movie = batmanBegins, ShowTime = show2214 },
+                new MovieShowTime { Movie = batmanBegins, ShowTime = show2217 },
+                new MovieShowTime { Movie = batmanBegins, ShowTime = show2221 }
             });
 
             forestGump.MovieShowTimes = new List<MovieShowTime>();
             forestGump.MovieShowTimes.AddRange(new List<MovieShowTime>
             {
-                new MovieShowTime { Movie = forestGump, ShowTime = show2111},
-                new MovieShowTime { Movie = forestGump, ShowTime = show2115},
-                new MovieShowTime { Movie = forestGump, ShowTime = show2211},
-                new MovieShowTime { Movie = forestGump, ShowTime = show2215}
+                new MovieShowTime { Movie = forestGump, ShowTime = show2111 },
+                new MovieShowTime { Movie = forestGump, ShowTime = show2115 },
+                new MovieShowTime { Movie = forestGump, ShowTime = show2211 },
+                new MovieShowTime { Movie = forestGump, ShowTime = show2215 }
             });
-
 
             evilDead.MovieShowTimes = new List<MovieShowTime>();
             evilDead.MovieShowTimes.AddRange(new List<MovieShowTime>
             {
-                new MovieShowTime { Movie = evilDead, ShowTime = show2121},
-                new MovieShowTime { Movie = evilDead, ShowTime = show2123},
-                new MovieShowTime { Movie = evilDead, ShowTime = show2221},
-                new MovieShowTime { Movie = evilDead, ShowTime = show2223}
+                new MovieShowTime { Movie = evilDead, ShowTime = show2121 },
+                new MovieShowTime { Movie = evilDead, ShowTime = show2123 },
+                new MovieShowTime { Movie = evilDead, ShowTime = show2221 },
+                new MovieShowTime { Movie = evilDead, ShowTime = show2223 }
             });
-
-
-
-
-
 
             _dbContext.Movies.AddRange(movies);
             _dbContext.Genres.AddRange(genres);
-            _dbContext.ShowTimes.AddRange(showTimes);
+
 
             _dbContext.SaveChanges();
         }

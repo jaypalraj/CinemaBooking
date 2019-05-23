@@ -17,13 +17,6 @@ namespace CinemaBooking.Data
             modelBuilder.Entity<MovieShowTime>()
                         .HasKey(k => new { k.MovieId, k.ShowTimeId });
 
-            modelBuilder.Entity<ShowTime>()
-                        .Property(s => s.Screen).IsRequired();
-
-            modelBuilder.Entity<Screen>()
-                        .HasMany<Seat>()
-                        .WithOne(s => s.Screen);
-
             base.OnModelCreating(modelBuilder);
         }
 
