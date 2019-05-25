@@ -74,7 +74,7 @@ namespace CinemaBooking.Tests.Fakes
             var screen3 = screens.Single(s => s.Title == "Screen3");
 
 
-            var seats = new List<Seat>
+            var seatsScreen1 = new List<Seat>
             {
                 new Seat { Title = "Seat1" },
                 new Seat { Title = "Seat2" },
@@ -88,9 +88,32 @@ namespace CinemaBooking.Tests.Fakes
                 new Seat { Title = "Seat10" }
             };
 
-            screen1.Seats.AddRange(seats);
-            screen2.Seats.AddRange(seats);
-            screen3.Seats.AddRange(seats);
+            var seatsScreen2 = new List<Seat>
+            {
+                new Seat { Title = "Seat1" },
+                new Seat { Title = "Seat2" },
+                new Seat { Title = "Seat3" },
+                new Seat { Title = "Seat4" },
+                new Seat { Title = "Seat5" },
+                new Seat { Title = "Seat8" },
+                new Seat { Title = "Seat9" },
+                new Seat { Title = "Seat10" }
+            };
+
+
+            var seatsScreen3 = new List<Seat>
+            {
+                new Seat { Title = "Seat1" },
+                new Seat { Title = "Seat2" },
+                new Seat { Title = "Seat3" },
+                new Seat { Title = "Seat4" },
+                new Seat { Title = "Seat5" },
+            };
+
+
+            screen1.Seats.AddRange(seatsScreen1);
+            screen2.Seats.AddRange(seatsScreen2);
+            screen3.Seats.AddRange(seatsScreen3);
 
             var showTimes = new List<ShowTime>
             {
@@ -154,9 +177,28 @@ namespace CinemaBooking.Tests.Fakes
                 new MovieShowTime { Movie = evilDead, ShowTime = show2223 }
             });
 
+
+            var user = new User
+            {
+                Name = "Jaypal Raj",
+                Email = "jaypalraj@example.com"
+            };
+
+            var booking = new Booking
+            {
+                User = user,
+                Seats = new List<Seat>
+                {
+                    seatsScreen2.Single(s => s.Title == "Seat2"),
+                    seatsScreen2.Single(s => s.Title == "Seat3"),
+                    seatsScreen2.Single(s => s.Title == "Seat4")
+                }
+            };
+
             _dbContext.Movies.AddRange(movies);
             _dbContext.Genres.AddRange(genres);
-
+            _dbContext.Users.Add(user);
+            _dbContext.Bookings.Add(booking);
 
             _dbContext.SaveChanges();
         }
