@@ -22,6 +22,14 @@ namespace CinemaBooking.WebAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication("Bearer")
+                    .AddIdentityServerAuthentication(options =>
+                    {
+                        options.Authority = "https://localhost:4001";
+                        options.RequireHttpsMetadata = true;
+                        options.ApiName = "CinemaBookingAPI";
+                    });
+
             services.AddDbContext<CinemaDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("CinemaBookingDb"));
@@ -48,6 +56,7 @@ namespace CinemaBooking.WebAPI
                 app.UseHsts();
             }
 
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
