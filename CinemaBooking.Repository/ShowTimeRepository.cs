@@ -1,10 +1,9 @@
 ﻿using CinemaBooking.Data;
 using CinemaBooking.Domain.Entities;
 using CinemaBooking.Domain.Interfaces;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CinemaBooking.Repository
@@ -18,9 +17,11 @@ namespace CinemaBooking.Repository
             this.db = db;
         }
 
-        public IEnumerable<ShowTime> GetShowTimesForMovie(int movieId)
+        public async Task<ICollection<ShowTime>> GetShowTimesForMovieAsync(int movieId)
         {
-            return db.ShowTimes.Where(st => st.MovieShowTimes.Any(m => m.MovieId == movieId));
+            var showTimes = db.ShowTimes.Include(st => st.Screen) as IQueryable<ShowTime>;
+
+            return await showTimes.Where(st => st.MovieShowTimes.Any(m => m.MovieId == movieId)).ToListAsync();
         }
     }
 }

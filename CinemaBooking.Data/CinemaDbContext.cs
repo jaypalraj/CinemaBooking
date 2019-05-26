@@ -21,9 +21,6 @@ namespace CinemaBooking.Data
             modelBuilder.Entity<SeatBooking>()
                         .HasKey(k => new { k.SeatId, k.BookingId });
 
-
-            
-
             #region GENRES
 
             modelBuilder.Entity<Genre>().HasData(
@@ -39,7 +36,7 @@ namespace CinemaBooking.Data
                     , new Genre() { GenreId = 10, Title = "Mystrey" }
                 );
 
-            #endregion
+            #endregion GENRES
 
             #region MOVIES
 
@@ -54,12 +51,12 @@ namespace CinemaBooking.Data
                     , new Movie() { MovieId = 8, Title = "The Ruins", Description = "A group of friends whose leisurely Mexican holiday takes a turn for the worse when they, along with a fellow tourist, embark on a remote archaeological dig in the jungle where something evil lives among the ruins.", Ratings = 5.9m, TrailerUrl = "https://www.youtube.com/watch?v=xVlBRkigRvc", IsActive = true }
                     );
 
-            #endregion
+            #endregion MOVIES
 
             #region MOVIE GENRES
 
             modelBuilder.Entity<MovieGenre>().HasData(
-                    new MovieGenre() {  MovieId = 1, GenreId = 1 }
+                    new MovieGenre() { MovieId = 1, GenreId = 1 }
                     , new MovieGenre() { MovieId = 1, GenreId = 3 }
                     , new MovieGenre() { MovieId = 1, GenreId = 4 }
                     , new MovieGenre() { MovieId = 2, GenreId = 1 }
@@ -79,9 +76,7 @@ namespace CinemaBooking.Data
                     , new MovieGenre() { MovieId = 8, GenreId = 2 }
                 );
 
-            #endregion
-
-
+            #endregion MOVIE GENRES
 
             #region SCREENS
 
@@ -93,8 +88,7 @@ namespace CinemaBooking.Data
                     , new Screen() { ScreenId = 5, Title = "Screen5" }
                 );
 
-            #endregion
-
+            #endregion SCREENS
 
             #region SHOW TIMES
 
@@ -121,9 +115,7 @@ namespace CinemaBooking.Data
                     , new ShowTime() { ShowTimeId = 16, ShowDateTime = new DateTime(2019, 05, 27, 21, 00, 00), ScreenId = 5 }
                 );
 
-            #endregion
-
-
+            #endregion SHOW TIMES
 
             #region MOVIE SHOW TIME
 
@@ -140,10 +132,7 @@ namespace CinemaBooking.Data
                     , new MovieShowTime() { MovieId = 2, ShowTimeId = 8 }
                 );
 
-            #endregion
-
-
-
+            #endregion MOVIE SHOW TIME
 
             #region SEATS
 
@@ -182,7 +171,6 @@ namespace CinemaBooking.Data
                     , new Seat() { SeatId = 29, Title = "C9", ScreenId = 1 }
                     , new Seat() { SeatId = 30, Title = "C10", ScreenId = 1 }
 
-
                     , new Seat() { SeatId = 31, Title = "A1", ScreenId = 2 }
                     , new Seat() { SeatId = 32, Title = "A2", ScreenId = 2 }
                     , new Seat() { SeatId = 33, Title = "A3", ScreenId = 2 }
@@ -200,7 +188,6 @@ namespace CinemaBooking.Data
                     , new Seat() { SeatId = 44, Title = "B6", ScreenId = 2 }
                     , new Seat() { SeatId = 45, Title = "B7", ScreenId = 2 }
                     , new Seat() { SeatId = 46, Title = "B8", ScreenId = 2 }
-
 
                     , new Seat() { SeatId = 47, Title = "A1", ScreenId = 3 }
                     , new Seat() { SeatId = 48, Title = "A2", ScreenId = 3 }
@@ -228,7 +215,6 @@ namespace CinemaBooking.Data
                     , new Seat() { SeatId = 68, Title = "C6", ScreenId = 3 }
                     , new Seat() { SeatId = 69, Title = "C7", ScreenId = 3 }
                     , new Seat() { SeatId = 70, Title = "C8", ScreenId = 3 }
-
 
                     , new Seat() { SeatId = 71, Title = "A1", ScreenId = 4 }
                     , new Seat() { SeatId = 72, Title = "A2", ScreenId = 4 }
@@ -285,7 +271,6 @@ namespace CinemaBooking.Data
                     , new Seat() { SeatId = 119, Title = "E9", ScreenId = 4 }
                     , new Seat() { SeatId = 120, Title = "E10", ScreenId = 4 }
 
-
                     , new Seat() { SeatId = 121, Title = "B1", ScreenId = 5 }
                     , new Seat() { SeatId = 122, Title = "B2", ScreenId = 5 }
                     , new Seat() { SeatId = 123, Title = "B3", ScreenId = 5 }
@@ -329,12 +314,10 @@ namespace CinemaBooking.Data
                     , new Seat() { SeatId = 158, Title = "E8", ScreenId = 5 }
                     , new Seat() { SeatId = 159, Title = "E9", ScreenId = 5 }
                     , new Seat() { SeatId = 160, Title = "E10", ScreenId = 5 }
-                
+
                     );
 
-            #endregion
-
-            
+            #endregion SEATS
 
             base.OnModelCreating(modelBuilder);
         }
@@ -346,7 +329,5 @@ namespace CinemaBooking.Data
         public DbSet<ShowTime> ShowTimes { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<User> Users { get; set; }
-
-
     }
 }

@@ -73,7 +73,6 @@ namespace CinemaBooking.Tests.Fakes
             var screen2 = screens.Single(s => s.Title == "Screen2");
             var screen3 = screens.Single(s => s.Title == "Screen3");
 
-
             var seatsScreen1 = new List<Seat>
             {
                 new Seat { Title = "Seat1" },
@@ -100,7 +99,6 @@ namespace CinemaBooking.Tests.Fakes
                 new Seat { Title = "Seat10" }
             };
 
-
             var seatsScreen3 = new List<Seat>
             {
                 new Seat { Title = "Seat1" },
@@ -109,7 +107,6 @@ namespace CinemaBooking.Tests.Fakes
                 new Seat { Title = "Seat4" },
                 new Seat { Title = "Seat5" },
             };
-
 
             screen1.Seats.AddRange(seatsScreen1);
             screen2.Seats.AddRange(seatsScreen2);
@@ -177,7 +174,6 @@ namespace CinemaBooking.Tests.Fakes
                 new MovieShowTime { Movie = evilDead, ShowTime = show2223 }
             });
 
-
             var user = new User
             {
                 Name = "Jaypal Raj",
@@ -192,7 +188,6 @@ namespace CinemaBooking.Tests.Fakes
             var seat2 = seatsScreen2.Single(s => s.Title == "Seat2");
             var seat3 = seatsScreen2.Single(s => s.Title == "Seat3");
             var seat4 = seatsScreen2.Single(s => s.Title == "Seat4");
-
 
             booking.SeatBookings = new List<SeatBooking>();
             booking.SeatBookings.AddRange(new List<SeatBooking>

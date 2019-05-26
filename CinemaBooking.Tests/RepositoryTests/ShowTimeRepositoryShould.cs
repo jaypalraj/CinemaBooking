@@ -12,7 +12,7 @@ namespace CinemaBooking.Tests.RepositoryTests
         private DbContextOptions<CinemaDbContext> _options;
         private CinemaDbContext _dbContext;
         private FakeData _fake;
-        private DateTime _refDateTime = new DateTime(2019,05,20);
+        private DateTime _refDateTime = new DateTime(2019, 05, 20);
 
         public ShowTimeRepositoryShould()
         {
@@ -22,9 +22,7 @@ namespace CinemaBooking.Tests.RepositoryTests
             _fake = new FakeData();
 
             _fake.SeedInMemoryData(_dbContext);
-
         }
-
 
         [Fact]
         public void GetAllActiveShowTimes()
@@ -43,15 +41,13 @@ namespace CinemaBooking.Tests.RepositoryTests
             var screens = movieShowTimes.Any(ms => ms.Screen != null);
             Assert.NotNull(movieShowTimes);
             Assert.True(screens);
-            
         }
-        
+
         [Fact]
         public void GetShowDateTimeForMovie()
         {
             var showTime = _dbContext.ShowTimes.Where(s => s.MovieShowTimes.Any(m => m.Movie.Title == "Batman Begins"));
             Assert.NotNull(showTime);
         }
-
     }
 }

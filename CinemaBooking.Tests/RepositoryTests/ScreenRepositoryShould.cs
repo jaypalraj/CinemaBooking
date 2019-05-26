@@ -2,10 +2,7 @@
 using CinemaBooking.Tests.Fakes;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace CinemaBooking.Tests.RepositoryTests
@@ -26,7 +23,6 @@ namespace CinemaBooking.Tests.RepositoryTests
             _fake.SeedInMemoryData(_dbContext);
         }
 
-
         [Theory]
         [InlineData("Batman Begins")]
         [InlineData("Evil Dead")]
@@ -41,7 +37,7 @@ namespace CinemaBooking.Tests.RepositoryTests
         public void GetScreenForMovieAtDateTime()
         {
             var movieTitle = "Batman Begins";
-            var dateTime = new DateTime(2019,05,22,14,00,00);
+            var dateTime = new DateTime(2019, 05, 22, 14, 00, 00);
 
             var movieScreen = _dbContext.Screens.Where(s => s.ShowTimes.Any(st => st.ShowDateTime == dateTime && st.MovieShowTimes.Any(m => m.Movie.Title == movieTitle)));
             Assert.Single(movieScreen);

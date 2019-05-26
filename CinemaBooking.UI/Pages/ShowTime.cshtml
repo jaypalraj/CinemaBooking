@@ -10,6 +10,6 @@
 <div>
     @foreach(var showTime in @Model.showTimes)
     {
-        <a asp-page="BookShow" asp-route-showTimeId="@showTime.ShowTimeId">@showTime.ShowDateTime</a>
+    <a asp-page="BookShow" asp-route-showTimeId="@showTime.ShowTimeId">@showTime.ShowDateTime</a>
     }
 </div>

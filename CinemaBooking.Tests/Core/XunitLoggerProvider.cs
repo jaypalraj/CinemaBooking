@@ -1,9 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit.Abstractions;
 
 namespace CinemaBooking.Tests.Core
@@ -51,6 +47,7 @@ namespace CinemaBooking.Tests.Core
         private class NoopDisposable : IDisposable
         {
             public static NoopDisposable Instance = new NoopDisposable();
+
             public void Dispose()
             { }
         }

@@ -2,10 +2,7 @@
 using CinemaBooking.Tests.Fakes;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace CinemaBooking.Tests.RepositoryTests
@@ -25,7 +22,6 @@ namespace CinemaBooking.Tests.RepositoryTests
 
             _fake.SeedInMemoryData(_dbContext);
         }
-
 
         [Fact]
         public void GetBookingsForUser()

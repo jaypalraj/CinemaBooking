@@ -1,14 +1,17 @@
 ﻿using CinemaBooking.Domain.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CinemaBooking.Domain.Interfaces
 {
     public interface IMovieRepository
     {
-        IEnumerable<Movie> GetAllActiveMovies();
+        Task<ICollection<Movie>> GetAllActiveMoviesAsync();
 
-        Movie GetByMovieId(int movieId);
+        Task<Movie> GetByMovieIdAsync(int movieId);
 
-        IEnumerable<Movie> GetMoviesForGenre(int genreId);
+        Task<ICollection<Movie>> GetMoviesForGenreAsync(int genreId);
+
+        Task<ICollection<Movie>> GetMoviesAtShowTime(int showTimeId);
     }
 }
