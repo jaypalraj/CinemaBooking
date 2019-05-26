@@ -31,8 +31,8 @@ namespace CinemaBooking.Tests.RepositoryTests
         public void GetBookingsForUser()
         {
             var booking = _dbContext.Bookings.Single(b => b.User.Email == "jaypalraj@example.com");
-            Assert.NotNull(booking.Seats);
-            Assert.Equal(3, booking.Seats.Count());
+            Assert.NotNull(booking.SeatBookings);
+            Assert.Equal(3, booking.SeatBookings.Count());
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace CinemaBooking.Tests.RepositoryTests
 
             var screen = _dbContext.Screens.Single(s => s.ShowTimes.Any(st => st.ShowTimeId == showTime.ShowTimeId));
 
-            var bookedSeats = screen.Seats.Where(s => s.Booking != null);
+            var bookedSeats = screen.Seats.Where(bs => bs.SeatBookings != null);
 
             Assert.NotNull(screen.Seats);
 

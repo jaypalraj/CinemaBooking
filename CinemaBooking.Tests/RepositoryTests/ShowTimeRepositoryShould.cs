@@ -46,7 +46,12 @@ namespace CinemaBooking.Tests.RepositoryTests
             
         }
         
-
+        [Fact]
+        public void GetShowDateTimeForMovie()
+        {
+            var showTime = _dbContext.ShowTimes.Where(s => s.MovieShowTimes.Any(m => m.Movie.Title == "Batman Begins"));
+            Assert.NotNull(showTime);
+        }
 
     }
 }

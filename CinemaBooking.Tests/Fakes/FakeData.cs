@@ -186,14 +186,21 @@ namespace CinemaBooking.Tests.Fakes
 
             var booking = new Booking
             {
-                User = user,
-                Seats = new List<Seat>
-                {
-                    seatsScreen2.Single(s => s.Title == "Seat2"),
-                    seatsScreen2.Single(s => s.Title == "Seat3"),
-                    seatsScreen2.Single(s => s.Title == "Seat4")
-                }
+                User = user
             };
+
+            var seat2 = seatsScreen2.Single(s => s.Title == "Seat2");
+            var seat3 = seatsScreen2.Single(s => s.Title == "Seat3");
+            var seat4 = seatsScreen2.Single(s => s.Title == "Seat4");
+
+
+            booking.SeatBookings = new List<SeatBooking>();
+            booking.SeatBookings.AddRange(new List<SeatBooking>
+            {
+                new SeatBooking { Booking = booking, Seat = seat2 },
+                new SeatBooking { Booking = booking, Seat = seat3 },
+                new SeatBooking { Booking = booking, Seat = seat4 }
+            });
 
             _dbContext.Movies.AddRange(movies);
             _dbContext.Genres.AddRange(genres);

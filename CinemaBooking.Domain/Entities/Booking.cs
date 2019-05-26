@@ -7,6 +7,6 @@ namespace CinemaBooking.Domain.Entities
         public int BookingId { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
-        public List<Seat> Seats { get; set; } = new List<Seat>();
+        public List<SeatBooking> SeatBookings { get; set; }
     }
 }

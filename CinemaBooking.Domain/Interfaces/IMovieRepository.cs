@@ -5,11 +5,9 @@ namespace CinemaBooking.Domain.Interfaces
 {
     public interface IMovieRepository
     {
-        Movie InsertMovie(Movie movie);
+        IEnumerable<Movie> GetAllActiveMovies();
 
-        Movie UpdateMovie(Movie movie);
-
-        IEnumerable<Movie> GetAllMovies();
+        Movie GetByMovieId(int movieId);
 
         IEnumerable<Movie> GetMoviesForGenre(int genreId);
     }
