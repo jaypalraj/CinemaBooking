@@ -11,24 +11,24 @@
                disabled="@Model.Required" />
         @if (Model.Required)
         {
-            <input type="hidden"
-                   name="ScopesConsented"
-                   value="@Model.Name" />
+        <input type="hidden"
+               name="ScopesConsented"
+               value="@Model.Name" />
         }
         <strong>@Model.DisplayName</strong>
         @if (Model.Emphasize)
         {
-            <span class="glyphicon glyphicon-exclamation-sign"></span>
+        <span class="glyphicon glyphicon-exclamation-sign"></span>
         }
     </label>
     @if (Model.Required)
     {
-        <span><em>(required)</em></span>
+    <span><em>(required)</em></span>
     }
     @if (Model.Description != null)
     {
-        <div class="consent-description">
-            <label for="scopes_@Model.Name">@Model.Description</label>
-        </div>
+    <div class="consent-description">
+        <label for="scopes_@Model.Name">@Model.Description</label>
+    </div>
     }
 </li>

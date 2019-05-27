@@ -3,11 +3,7 @@ using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CinemaBooking.IdentitySrv
 {
@@ -31,7 +27,6 @@ namespace CinemaBooking.IdentitySrv
 
                     context.SaveChanges();
                 }
-
 
                 if (!context.IdentityResources.Any())
                 {

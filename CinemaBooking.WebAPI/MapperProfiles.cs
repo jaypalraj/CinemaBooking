@@ -12,6 +12,8 @@ namespace CinemaBooking.WebAPI
             this.CreateMap<Movie, MovieModel>()
                 .ForMember(mm => mm.Genres, m => m.MapFrom(x => x.MovieGenres.Select(s => s.Genre.Title).ToList()))
                 .ForMember(mm => mm.ShowDateTimes, m => m.MapFrom(x => x.MovieShowTimes.Select(s => s.ShowTime).ToList()));
+
+            this.CreateMap<Screen, ScreenModel>();
         }
     }
 }

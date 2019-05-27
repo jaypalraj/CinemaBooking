@@ -6,8 +6,8 @@
 <dl>
     @foreach (var claim in Model.AuthenticateResult.Principal.Claims)
     {
-        <dt>@claim.Type</dt>
-        <dd>@claim.Value</dd>
+    <dt>@claim.Type</dt>
+    <dd>@claim.Value</dd>
     }
 </dl>
 
@@ -15,18 +15,18 @@
 <dl>
     @foreach (var prop in Model.AuthenticateResult.Properties.Items)
     {
-        <dt>@prop.Key</dt>
-        <dd>@prop.Value</dd>
+    <dt>@prop.Key</dt>
+    <dd>@prop.Value</dd>
     }
 </dl>
 
 @if (Model.Clients.Any())
 {
-    <h3>Clients</h3>
-    <ul>
-        @foreach (var client in Model.Clients)
+<h3>Clients</h3>
+<ul>
+    @foreach (var client in Model.Clients)
         {
-            <li>@client</li>
+    <li>@client</li>
         }
-    </ul>
+</ul>
 }

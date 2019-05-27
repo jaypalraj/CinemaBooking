@@ -1,0 +1,9 @@
+﻿@page
+@model CinemaBooking.UI.Pages.Movie.ListModel
+
+
+@foreach (var m in @Model.Movies)
+{
+    <a asp-page="Details" asp-page-handler="MovieDetails" asp-route-movieId="@m.MovieId">@m.Title</a>
+}
+

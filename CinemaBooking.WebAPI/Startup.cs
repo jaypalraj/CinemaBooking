@@ -1,17 +1,18 @@
-﻿using CinemaBooking.Data;
+﻿using AutoMapper;
+using CinemaBooking.Data;
 using CinemaBooking.Domain.Interfaces;
+using CinemaBooking.Infrastructure;
 using CinemaBooking.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using AutoMapper;
 using Swashbuckle.AspNetCore.Swagger;
-using System.Collections.Generic;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CinemaBooking.WebAPI
@@ -19,19 +20,18 @@ namespace CinemaBooking.WebAPI
     public class Startup
     {
         public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication("Bearer")
                     .AddIdentityServerAuthentication(options =>
                     {
-                        options.Authority = "https://localhost:4001";
+                        options.Authority = CinemaBookingConstants.IdSrvUrl;
                         options.RequireHttpsMetadata = true;
                         options.ApiName = "CinemaBookingAPI";
                     });
@@ -44,6 +44,7 @@ namespace CinemaBooking.WebAPI
             services.AddScoped<IMovieRepository, MovieRepository>();
             services.AddScoped<IShowTimeRepository, ShowTimeRepository>();
             services.AddScoped<ISeatRepository, SeatRepository>();
+            services.AddScoped<IScreenRepository, ScreenRepository>();
 
             services.AddAutoMapper(typeof(MapperProfiles));
 
@@ -60,8 +61,8 @@ namespace CinemaBooking.WebAPI
                 {
                     Type = "oauth2",
                     Flow = "implicit",
-                    AuthorizationUrl = "https://localhost:4001/connect/authorize",
-                    TokenUrl = "https://localhost:4001/connect/token",
+                    AuthorizationUrl = $"{CinemaBookingConstants.IdSrvUrl}connect/authorize",
+                    TokenUrl = $"{CinemaBookingConstants.IdSrvUrl}connect/token",
                     Scopes = new Dictionary<string, string>()
                     {
                         { "CinemaBookingAPI", "Cinema Booking API" }
@@ -101,7 +102,7 @@ namespace CinemaBooking.WebAPI
             var authorizeAttributeExits = context.ApiDescription.ControllerAttributes().OfType<AuthorizeAttribute>().Any()
                                           || context.ApiDescription.ActionAttributes().OfType<AuthorizeAttribute>().Any();
 
-            if(authorizeAttributeExits)
+            if (authorizeAttributeExits)
             {
                 operation.Responses.Add("401", new Response { Description = "Unauthorized" });
                 operation.Responses.Add("403", new Response { Description = "Forbidden" });

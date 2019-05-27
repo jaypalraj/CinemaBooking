@@ -1,6 +1,6 @@
 ﻿@model LoggedOutViewModel
 
-@{ 
+@{
     // set this so the layout rendering sees an anonymous user
     ViewData["signed-out"] = true;
 }
@@ -13,15 +13,15 @@
 
     @if (Model.PostLogoutRedirectUri != null)
     {
-        <div>
-            Click <a class="PostLogoutRedirectUri" href="@Model.PostLogoutRedirectUri">here</a> to return to the
-            <span>@Model.ClientName</span> application.
-        </div>
+    <div>
+        Click <a class="PostLogoutRedirectUri" href="@Model.PostLogoutRedirectUri">here</a> to return to the
+        <span>@Model.ClientName</span> application.
+    </div>
     }
 
     @if (Model.SignOutIframeUrl != null)
     {
-        <iframe width="0" height="0" class="signout" src="@Model.SignOutIframeUrl"></iframe>
+    <iframe width="0" height="0" class="signout" src="@Model.SignOutIframeUrl"></iframe>
     }
 </div>
 
@@ -29,6 +29,6 @@
 {
     @if (Model.AutomaticRedirectAfterSignOut)
     {
-        <script src="~/js/signout-redirect.js"></script>
+    <script src="~/js/signout-redirect.js"></script>
     }
 }

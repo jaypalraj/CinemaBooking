@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CinemaBooking.WebAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("[controller]")]
     public class MoviesController : ControllerBase
     {
@@ -64,8 +64,6 @@ namespace CinemaBooking.WebAPI.Controllers
                 if (result == null) return NotFound();
 
                 return mapper.Map<MovieModel[]>(result);
-
-
             }
             catch (Exception)
             {

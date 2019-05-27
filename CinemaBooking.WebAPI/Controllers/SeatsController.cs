@@ -4,9 +4,6 @@ using CinemaBooking.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CinemaBooking.WebAPI.Controllers
@@ -23,7 +20,6 @@ namespace CinemaBooking.WebAPI.Controllers
             this.mapper = mapper;
         }
 
-
         [HttpGet("{screenId}")]
         public async Task<ActionResult<SeatModel[]>> Get(int screenId)
         {
@@ -33,12 +29,11 @@ namespace CinemaBooking.WebAPI.Controllers
 
                 return mapper.Map<SeatModel[]>(seats);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-
 
         [HttpGet("Booked/{showTimeId:int}/{movieId:int}")]
         public async Task<ActionResult<SeatModel[]>> GetBookedSeats(int showTimeId, int movieId)
@@ -49,7 +44,7 @@ namespace CinemaBooking.WebAPI.Controllers
 
                 return mapper.Map<SeatModel[]>(bookedSeats);
             }
-            catch(Exception ex)
+            catch (Exception)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError);
             }

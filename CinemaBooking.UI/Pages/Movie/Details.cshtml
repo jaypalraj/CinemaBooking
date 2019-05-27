@@ -1,0 +1,18 @@
+﻿@page
+@model CinemaBooking.UI.Pages.Movie.DetailsModel
+
+<h1>@Model.Movie.Title</h1>
+<hr />
+<p>@Model.Movie.Description</p>
+<div>
+    <label>Ratings:</label>@Model.Movie.Ratings
+</div>
+<div>
+    @foreach (var st in @Model.Movie.ShowDateTimes)
+    {
+        <a asp-page="/Screen/Details" 
+           asp-page-handler="Seats"
+           asp-route-movieId="@Model.Movie.MovieId"
+           asp-route-showTimeId="@st.ShowTimeId">@st.ShowDateTime.Hour:@st.ShowDateTime.Minute</a>
+    }
+</div>

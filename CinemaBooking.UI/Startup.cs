@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using CinemaBooking.Infrastructure;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,11 +18,16 @@ namespace CinemaBooking.UI
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IClientHelper, ClientHelper>();
+
+
             services.AddMvc().AddRazorPagesOptions(options =>
             {
-                options.Conventions.AddPageRoute("/Movie", "");
+                options.Conventions.AddPageRoute("/Movie/List", "");
             });
 
+
+           
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             services.AddAuthentication(options =>
@@ -33,7 +39,7 @@ namespace CinemaBooking.UI
             .AddOpenIdConnect("oidc", options =>
             {
                 options.SignInScheme = "Cookies";
-                options.Authority = "https://localhost:4001";
+                options.Authority = CinemaBookingConstants.IdSrvUrl;
                 options.RequireHttpsMetadata = true;
                 options.ClientId = "cinemabooking.ui";
                 options.SaveTokens = true;

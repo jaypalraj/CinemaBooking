@@ -1,11 +1,8 @@
-﻿using IdentityServer4;
+﻿using CinemaBooking.Infrastructure;
+using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CinemaBooking.IdentitySrv
 {
@@ -47,8 +44,6 @@ namespace CinemaBooking.IdentitySrv
             };
         }
 
-
-
         public static IEnumerable<Client> GetClients()
         {
             return new List<Client>
@@ -79,8 +74,8 @@ namespace CinemaBooking.IdentitySrv
                     ClientName = "CinemaBooking UI",
                     AllowedGrantTypes = GrantTypes.Implicit,
 
-                    RedirectUris = { "https://localhost:6001/signin-oidc" },
-                    PostLogoutRedirectUris = { "https://localhost:6001/signout-callback-oidc" },
+                    RedirectUris = { $"{CinemaBookingConstants.WebUIUrl}signin-oidc" },
+                    PostLogoutRedirectUris = { $"{CinemaBookingConstants.WebUIUrl}signout-callback-oidc" },
 
                     AllowedScopes = new List<string>
                     {
@@ -94,8 +89,8 @@ namespace CinemaBooking.IdentitySrv
                     ClientName = "Swagger API UI",
                     AllowedGrantTypes = GrantTypes.Implicit,
 
-                    RedirectUris = { "https://localhost:5001/swagger/oauth2-redirect.html" },
-                    PostLogoutRedirectUris = { "http://localhost/5001/swagger" },
+                    RedirectUris = { $"{CinemaBookingConstants.WebAPIsUrl}swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { $"{CinemaBookingConstants.WebAPIsUrl}swagger" },
 
                     AllowedScopes = { "CinemaBookingAPI" },
                     AllowAccessTokensViaBrowser = true

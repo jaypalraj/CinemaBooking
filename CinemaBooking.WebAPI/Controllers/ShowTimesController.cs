@@ -40,7 +40,5 @@ namespace CinemaBooking.WebAPI.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-
-
     }
 }
