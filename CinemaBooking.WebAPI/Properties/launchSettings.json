@@ -19,7 +19,8 @@
     },
     "CinemaBooking.WebAPI": {
       "commandName": "Project",
-      "launchUrl": "movies",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

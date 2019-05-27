@@ -2,8 +2,6 @@
 @using CinemaBooking.Domain.Entities
 @model CinemaBooking.UI.Views.MovieModel
 
-@foreach(var movie in Model.Movies)
-{
-<a asp-page="ShowTime" asp-route-movieId="@movie.MovieId">@movie.Title</a>
-<br />
-}
+
+
+<a asp-page-handler="SignOut">Sign Out</a>

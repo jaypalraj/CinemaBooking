@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace CinemaBooking.WebAPI.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     public class MoviesController : ControllerBase
     {
