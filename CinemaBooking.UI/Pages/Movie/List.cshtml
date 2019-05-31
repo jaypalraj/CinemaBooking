@@ -1,6 +1,14 @@
 ﻿@page
 @model CinemaBooking.UI.Pages.Movie.ListModel
 
+    <form method="post">
+        <select asp-for="SelectedGenreId" asp-items="@Model.Genres">
+            <option value="">Select genre</option>
+        </select>
+        <button asp-page-handler="FilterMovies">Filter</button>
+    </form>
+
+<br/>
 
 @foreach (var m in @Model.Movies)
 {

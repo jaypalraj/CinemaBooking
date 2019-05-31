@@ -41,6 +41,7 @@ namespace CinemaBooking.WebAPI
                 options.UseSqlServer(Configuration.GetConnectionString("CinemaBookingDb"));
             });
 
+            services.AddScoped<IGenreRepository, GenreRepository>();
             services.AddScoped<IMovieRepository, MovieRepository>();
             services.AddScoped<IShowTimeRepository, ShowTimeRepository>();
             services.AddScoped<ISeatRepository, SeatRepository>();

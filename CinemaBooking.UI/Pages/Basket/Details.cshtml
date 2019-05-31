@@ -1,0 +1,18 @@
+﻿@page
+@model CinemaBooking.UI.Pages.Basket.DetailsModel
+
+
+
+<label>Booked for @Model.Screen.Title</label>
+
+@foreach(var seat in @Model.Screen.Seats)
+{
+    <p>@seat.Title</p>
+}
+
+
+<form asp-page-handler="BuyTickets" method="post">
+
+    <button>Buy Tickets</button>
+
+</form>

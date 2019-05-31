@@ -10,7 +10,7 @@
 <div>
     @foreach (var st in @Model.Movie.ShowDateTimes)
     {
-        <a asp-page="/Screen/Details" 
+        <a asp-page="/Screen/Seats" 
            asp-page-handler="Seats"
            asp-route-movieId="@Model.Movie.MovieId"
            asp-route-showTimeId="@st.ShowTimeId">@st.ShowDateTime.Hour:@st.ShowDateTime.Minute</a>

@@ -7,6 +7,8 @@ using CinemaBooking.Domain.Models;
 using CinemaBooking.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CinemaBooking.UI.Pages.Screen
 {
@@ -14,7 +16,9 @@ namespace CinemaBooking.UI.Pages.Screen
     {
         private readonly IClientHelper clientHelper;
 
+        [BindProperty]
         public ScreenModel Screen { get; set; }
+
 
         public DetailsModel(IClientHelper clientHelper)
         {
@@ -33,5 +37,18 @@ namespace CinemaBooking.UI.Pages.Screen
 
             return Page();
         }
+
+
+        public IActionResult OnPost()
+        {
+            var screen = new ScreenModel();
+            screen = Screen;
+            screen.Seats = Screen.Seats.Where(s => s.IsSelected == true).ToList();
+            
+            HttpContext.Session.SetObject(SessionKeys.sesssionBasketSeats, screen);
+
+            return Redirect("/Basket/Details");
+        }
+
     }
 }

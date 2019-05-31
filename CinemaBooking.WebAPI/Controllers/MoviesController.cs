@@ -70,5 +70,22 @@ namespace CinemaBooking.WebAPI.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
+        [HttpGet("ForGenre/{genreId}")]
+        public async Task<ActionResult<MovieModel[]>> GetByGenre(int genreId)
+        {
+            try
+            {
+                var result = await movieRepository.GetMoviesForGenreAsync(genreId);
+
+                if (result == null) return NotFound();
+
+                return mapper.Map<MovieModel[]>(result);
+            }
+            catch(Exception)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
     }
 }
