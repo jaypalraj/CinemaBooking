@@ -17,10 +17,11 @@ namespace CinemaBooking.Repository
             this.db = db;
         }
 
-        public async Task<ICollection<Seat>> GetBookedSeats(int movieId, int showTimeId)
+        public async Task<ICollection<Seat>> GetBookedSeats(int showTimeId, int movieId)
         {
-            var seats = db.Seats.Include(sb => sb.SeatBookings).ThenInclude(b => b.Booking) as IQueryable<Seat>;
-            return await seats.Where(s => s.Screen.ShowTimes.Any(st => st.MovieShowTimes.Any(mt => mt.MovieId == movieId && mt.ShowTimeId == showTimeId))).ToListAsync();
+            var seats = db.Seats as IQueryable<Seat>;
+            return await seats.Include("Bookings")
+                              .Where(s => s.Bookings.Any(b => b.Seat.Screen.ShowTimes.Any(st => st.MovieShowTimes.Any(mt => mt.ShowTimeId == showTimeId && mt.MovieId == movieId)))).ToListAsync();
         }
 
         public async Task<ICollection<Seat>> GetSeatsForScreen(int screenId)

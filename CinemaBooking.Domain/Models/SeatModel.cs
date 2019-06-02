@@ -8,5 +8,6 @@ namespace CinemaBooking.Domain.Models
         public string Title { get; set; }
 
         public bool IsSelected { get; set; }
+        public bool IsBooked { get; set; }
     }
 }

@@ -18,9 +18,6 @@ namespace CinemaBooking.Data
             modelBuilder.Entity<MovieShowTime>()
                         .HasKey(k => new { k.MovieId, k.ShowTimeId });
 
-            modelBuilder.Entity<SeatBooking>()
-                        .HasKey(k => new { k.SeatId, k.BookingId });
-
             #region GENRES
 
             modelBuilder.Entity<Genre>().HasData(
@@ -328,6 +325,6 @@ namespace CinemaBooking.Data
         public DbSet<Screen> Screens { get; set; }
         public DbSet<ShowTime> ShowTimes { get; set; }
         public DbSet<Booking> Bookings { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
     }
 }

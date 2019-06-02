@@ -8,6 +8,6 @@ namespace CinemaBooking.Domain.Interfaces
     {
         Task<ICollection<Seat>> GetSeatsForScreen(int screenId);
 
-        Task<ICollection<Seat>> GetBookedSeats(int movieId, int showTimeId);
+        Task<ICollection<Seat>> GetBookedSeats(int showTimeId, int movieId);
     }
 }

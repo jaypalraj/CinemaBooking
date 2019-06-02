@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using CinemaBooking.Domain.Models;
 using CinemaBooking.Infrastructure;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 

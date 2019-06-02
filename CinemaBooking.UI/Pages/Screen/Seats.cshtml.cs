@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace CinemaBooking.UI.Pages.Screen
 {
@@ -18,7 +19,6 @@ namespace CinemaBooking.UI.Pages.Screen
 
         [BindProperty]
         public ScreenModel Screen { get; set; }
-
 
         public DetailsModel(IClientHelper clientHelper)
         {
@@ -35,17 +35,32 @@ namespace CinemaBooking.UI.Pages.Screen
             var content = await clientHelper.GetAsync($"screens/{movieId}/{showTimeId}");
             Screen = await content.ReadAsAsync<ScreenModel>();
 
+            var contentBookedSeats = await clientHelper.GetAsync($"seats/booked/{movieId}/{showTimeId}");
+            var bookedSeats = await contentBookedSeats.ReadAsAsync<SeatModel[]>();
+
+            foreach(var seat in Screen.Seats.Where(s => bookedSeats.Any(bs => bs.SeatId == s.SeatId)))
+            {
+                seat.IsBooked = true;
+            }
+
             return Page();
         }
 
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost(int movieId)
         {
-            var screen = new ScreenModel();
-            screen = Screen;
-            screen.Seats = Screen.Seats.Where(s => s.IsSelected == true).ToList();
+            var contentMovie = await clientHelper.GetAsync($"movies/{movieId}");
+            var Movie = await contentMovie.ReadAsAsync<MovieModel>();
+
+            var movieScreen = new MovieScreenModel()
+            {
+                Movie = Movie,
+                Screen = Screen
+            };
+
+            movieScreen.Screen.Seats = Screen.Seats.Where(s => s.IsSelected == true).ToList();
             
-            HttpContext.Session.SetObject(SessionKeys.sesssionBasketSeats, screen);
+            HttpContext.Session.SetObject(SessionKeys.sesssionBasketSeats, movieScreen);
 
             return Redirect("/Basket/Details");
         }

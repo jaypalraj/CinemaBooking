@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaBooking.Data.Migrations
 {
     [DbContext(typeof(CinemaDbContext))]
-    [Migration("20190526065657_Init")]
-    partial class Init
+    [Migration("20190602095347_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,15 +21,34 @@ namespace CinemaBooking.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("CinemaBooking.Domain.Entities.AppUser", b =>
+                {
+                    b.Property<int>("AppUserId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("AppUserId");
+
+                    b.ToTable("AppUsers");
+                });
+
             modelBuilder.Entity("CinemaBooking.Domain.Entities.Booking", b =>
                 {
                     b.Property<int>("BookingId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("SeatId");
+
                     b.Property<int>("UserId");
 
                     b.HasKey("BookingId");
+
+                    b.HasIndex("SeatId");
 
                     b.HasIndex("UserId");
 
@@ -1380,19 +1399,6 @@ namespace CinemaBooking.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CinemaBooking.Domain.Entities.SeatBooking", b =>
-                {
-                    b.Property<int>("SeatId");
-
-                    b.Property<int>("BookingId");
-
-                    b.HasKey("SeatId", "BookingId");
-
-                    b.HasIndex("BookingId");
-
-                    b.ToTable("SeatBooking");
-                });
-
             modelBuilder.Entity("CinemaBooking.Domain.Entities.ShowTime", b =>
                 {
                     b.Property<int>("ShowTimeId")
@@ -1508,24 +1514,14 @@ namespace CinemaBooking.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CinemaBooking.Domain.Entities.User", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("CinemaBooking.Domain.Entities.Booking", b =>
                 {
-                    b.HasOne("CinemaBooking.Domain.Entities.User", "User")
+                    b.HasOne("CinemaBooking.Domain.Entities.Seat", "Seat")
+                        .WithMany("Bookings")
+                        .HasForeignKey("SeatId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CinemaBooking.Domain.Entities.AppUser", "User")
                         .WithMany("Bookings")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -1562,19 +1558,6 @@ namespace CinemaBooking.Data.Migrations
                     b.HasOne("CinemaBooking.Domain.Entities.Screen", "Screen")
                         .WithMany("Seats")
                         .HasForeignKey("ScreenId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CinemaBooking.Domain.Entities.SeatBooking", b =>
-                {
-                    b.HasOne("CinemaBooking.Domain.Entities.Booking", "Booking")
-                        .WithMany("SeatBookings")
-                        .HasForeignKey("BookingId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CinemaBooking.Domain.Entities.Seat", "Seat")
-                        .WithMany("SeatBookings")
-                        .HasForeignKey("SeatId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

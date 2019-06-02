@@ -1,13 +1,27 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
 
 namespace CinemaBooking.Data.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "AppUsers",
+                columns: table => new
+                {
+                    AppUserId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUsers", x => x.AppUserId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Genres",
                 columns: table => new
@@ -49,20 +63,6 @@ namespace CinemaBooking.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Screens", x => x.ScreenId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -135,16 +135,23 @@ namespace CinemaBooking.Data.Migrations
                 {
                     BookingId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>(nullable: false),
+                    SeatId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Bookings", x => x.BookingId);
                     table.ForeignKey(
-                        name: "FK_Bookings_Users_UserId",
+                        name: "FK_Bookings_Seats_SeatId",
+                        column: x => x.SeatId,
+                        principalTable: "Seats",
+                        principalColumn: "SeatId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Bookings_AppUsers_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalTable: "AppUsers",
+                        principalColumn: "AppUserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -169,30 +176,6 @@ namespace CinemaBooking.Data.Migrations
                         column: x => x.ShowTimeId,
                         principalTable: "ShowTimes",
                         principalColumn: "ShowTimeId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SeatBooking",
-                columns: table => new
-                {
-                    SeatId = table.Column<int>(nullable: false),
-                    BookingId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SeatBooking", x => new { x.SeatId, x.BookingId });
-                    table.ForeignKey(
-                        name: "FK_SeatBooking_Bookings_BookingId",
-                        column: x => x.BookingId,
-                        principalTable: "Bookings",
-                        principalColumn: "BookingId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SeatBooking_Seats_SeatId",
-                        column: x => x.SeatId,
-                        principalTable: "Seats",
-                        principalColumn: "SeatId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -472,6 +455,11 @@ namespace CinemaBooking.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bookings_SeatId",
+                table: "Bookings",
+                column: "SeatId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Bookings_UserId",
                 table: "Bookings",
                 column: "UserId");
@@ -487,11 +475,6 @@ namespace CinemaBooking.Data.Migrations
                 column: "ShowTimeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SeatBooking_BookingId",
-                table: "SeatBooking",
-                column: "BookingId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Seats_ScreenId",
                 table: "Seats",
                 column: "ScreenId");
@@ -505,13 +488,19 @@ namespace CinemaBooking.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Bookings");
+
+            migrationBuilder.DropTable(
                 name: "MovieGenre");
 
             migrationBuilder.DropTable(
                 name: "MovieShowTime");
 
             migrationBuilder.DropTable(
-                name: "SeatBooking");
+                name: "Seats");
+
+            migrationBuilder.DropTable(
+                name: "AppUsers");
 
             migrationBuilder.DropTable(
                 name: "Genres");
@@ -521,15 +510,6 @@ namespace CinemaBooking.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "ShowTimes");
-
-            migrationBuilder.DropTable(
-                name: "Bookings");
-
-            migrationBuilder.DropTable(
-                name: "Seats");
-
-            migrationBuilder.DropTable(
-                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Screens");

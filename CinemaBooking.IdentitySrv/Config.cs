@@ -66,7 +66,12 @@ namespace CinemaBooking.IdentitySrv
                     {
                         new Secret("secret".Sha256())
                     },
-                    AllowedScopes = { "CinemaBookingAPI" }
+                    AllowedScopes = new List<string>
+                    {
+                        "CinemaBookingAPI",
+                        IdentityServerConstants.StandardScopes.Profile
+
+                    }
                 },
                 new Client
                 {

@@ -174,7 +174,7 @@ namespace CinemaBooking.Tests.Fakes
                 new MovieShowTime { Movie = evilDead, ShowTime = show2223 }
             });
 
-            var user = new User
+            var user = new AppUser
             {
                 Name = "Jaypal Raj",
                 Email = "jaypalraj@example.com"
@@ -189,17 +189,21 @@ namespace CinemaBooking.Tests.Fakes
             var seat3 = seatsScreen2.Single(s => s.Title == "Seat3");
             var seat4 = seatsScreen2.Single(s => s.Title == "Seat4");
 
-            booking.SeatBookings = new List<SeatBooking>();
-            booking.SeatBookings.AddRange(new List<SeatBooking>
-            {
-                new SeatBooking { Booking = booking, Seat = seat2 },
-                new SeatBooking { Booking = booking, Seat = seat3 },
-                new SeatBooking { Booking = booking, Seat = seat4 }
-            });
+            //booking.Seats.Add(seat2);
+            //booking.Seats.Add(seat3);
+            //booking.Seats.Add(seat4);
+
+            //booking.SeatBookings = new List<SeatBooking>();
+            //booking.SeatBookings.AddRange(new List<SeatBooking>
+            //{
+            //    new SeatBooking { Booking = booking, Seat = seat2 },
+            //    new SeatBooking { Booking = booking, Seat = seat3 },
+            //    new SeatBooking { Booking = booking, Seat = seat4 }
+            //});
 
             _dbContext.Movies.AddRange(movies);
             _dbContext.Genres.AddRange(genres);
-            _dbContext.Users.Add(user);
+            _dbContext.AppUsers.Add(user);
             _dbContext.Bookings.Add(booking);
 
             _dbContext.SaveChanges();

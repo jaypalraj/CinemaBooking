@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{movieId:int},{showTimeId:int}"
 @model CinemaBooking.UI.Pages.Screen.DetailsModel
 
 <h1>@Model.Screen.Title</h1>
@@ -11,7 +11,7 @@
 
     @for (var i = 0; i < @Model.Screen.Seats.Count(); i++)
     {
-        <input asp-for="@Model.Screen.Seats[i].IsSelected" type="checkbox" />
+        <input asp-for="@Model.Screen.Seats[i].IsSelected" type="checkbox" disabled="@Model.Screen.Seats[i].IsBooked"/>
         <label asp-for="@Model.Screen.Seats[i].SeatId">@Model.Screen.Seats[i].Title</label>
         <input asp-for="@Model.Screen.Seats[i].SeatId" type="hidden" />
         <input asp-for="@Model.Screen.Seats[i].Title" type="hidden" />

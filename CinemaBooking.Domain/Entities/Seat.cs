@@ -8,6 +8,6 @@ namespace CinemaBooking.Domain.Entities
         public string Title { get; set; }
         public Screen Screen { get; set; }
         public int ScreenId { get; set; }
-        public List<SeatBooking> SeatBookings { get; set; }
+        public List<Booking> Bookings { get; set; } = new List<Booking>();
     }
 }

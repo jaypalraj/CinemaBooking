@@ -46,6 +46,8 @@ namespace CinemaBooking.WebAPI
             services.AddScoped<IShowTimeRepository, ShowTimeRepository>();
             services.AddScoped<ISeatRepository, SeatRepository>();
             services.AddScoped<IScreenRepository, ScreenRepository>();
+            services.AddScoped<IBookingRepository, BookingRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddAutoMapper(typeof(MapperProfiles));
 

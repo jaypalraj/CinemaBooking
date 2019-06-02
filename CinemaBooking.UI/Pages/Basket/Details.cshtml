@@ -3,15 +3,26 @@
 
 
 
-<label>Booked for @Model.Screen.Title</label>
+<label>Booked for @Model.MovieScreen.Movie.Title - @Model.MovieScreen.Screen.Title</label>
 
-@foreach(var seat in @Model.Screen.Seats)
+
+@foreach(var seat in @Model.MovieScreen.Screen.Seats)
 {
     <p>@seat.Title</p>
 }
 
 
 <form asp-page-handler="BuyTickets" method="post">
+
+    <label asp-for="UserBooking.User.Name"></label>
+    <input asp-for="UserBooking.User.Name" />
+
+    <br />
+
+    <label asp-for="UserBooking.User.Email"></label>
+    <input asp-for="UserBooking.User.Email" />
+
+    <hr />
 
     <button>Buy Tickets</button>
 
